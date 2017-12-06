@@ -1,4 +1,4 @@
-# Scaffolding Bluehead genome with SSPACE example
+# Scaffolding Bluehead genome with SSPACE
 
 ## Set up 
 
