@@ -1,0 +1,6 @@
+Lib1 TAB /data/bluehead_scaffold/trim_data/blue_350bp_insert.tab 350 0.5 FR
+Lib2 TAB /data/bluehead_scaffold/trim_data/blue_550bp_insert.tab 550 0.5 FR
+Lib3 TAB /data/bluehead_scaffold/trim_data/blue_6k_mate_pair.tab 4000 0.5 RF
+Lib4 TAB /data/bluehead_scaffold/trim_data/blue_8k_mate_pair.tab 7000 0.5 RF
+unpaired bowtie /data/bluehead_scaffold/trim_data/blue_350bp_unpaired.fq
+unpaired bowtie /data/bluehead_scaffold/trim_data/blue_550bp_unpaired.fq
