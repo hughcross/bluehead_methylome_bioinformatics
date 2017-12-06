@@ -1,4 +1,4 @@
-# scaffolding Bluehead genome with SSPACE example
+# Scaffolding Bluehead genome with SSPACE example
 
 ## Set up 
 
@@ -16,7 +16,7 @@ SSPACE variable used (in my .bashrc, but just a preference):
 
 `cp_unzip_files.sh`
 
-### rename, concat insert libs
+### Rename, concat insert libs
 
 Libraries used: pe trimmed with Trimmomatic (folder: trailing26, from Trimmomatic processing)
 
@@ -32,7 +32,7 @@ rename_unpaired_files.sh
 cat_rm_unp_files.sh
 ```
 
-## mapping and converting sam files to table format
+## Mapping and converting sam files to table format
 
 a nice option in SSPACE is that allows us to map the sequences to the genome first, then convert the same files to simple tab-delimited files to input to SSPACE. This saves a lot  of time (otherwise SSPACE would map all reads first), and allows us to choose the mapper we want.
 
@@ -66,16 +66,17 @@ perl /usr/local/SSPACE-STANDARD-3.0_linux-x86_64/tools/sam_bam2tab.pl mod_sortN_
 perl /usr/local/SSPACE-STANDARD-3.0_linux-x86_64/tools/sam_bam2tab.pl mod_sortN_blue_550bp_insert.sam /1 /2 blue_550bp_insert.tab
 ```
 
-### mate pair libraries
+### Mate pair libraries
 
 #### Merge bam files
 
 mate pairs were merged (trimmed and mapped with Nextclip software)
 
 original bam files are here, check Nextclip documentation for details:
+
 **/scratch/bluehead_wrasse/nextclip/align_to_genome**
 
-merge bam files, sorting by name
+merge bam files, sorting by name:
 ```
 samtools merge -n -@ 12 -b mates6k_list /data/bluehead_scaffold/trim_data/sortN_blue_6k_mate_pair.bam
 samtools merge -n -@ 12 -b mates8k_list /data/bluehead_scaffold/trim_data/sortN_blue_8k_mate_pair.bam
@@ -117,7 +118,7 @@ $SSPACE -l blue_scaf1_lib -s \
 
 Subsequent runs can be done on original data using -S 1 option
 
-I reran this a few times with different parameters, Just moving the output files to a new folder so they were not overwritten
+I reran this a few times with different parameters, Just moving the output files to a new folder so they were not overwritten. Here is the final command used for downstream gapfilling.
 ```
 $SSPACE -l blue_scaf1_lib -s \
  /data/bluehead_scaffold/data/bluehead_350bp_assembly_sept2016.fasta \
@@ -126,15 +127,15 @@ $SSPACE -l blue_scaf1_lib -s \
 
 There are many output files, but here are log and summary files from first run:
 
-*first_run_blue_scaf1.logfile.txt*
+* *first_run_blue_scaf1.logfile.txt*
 
-*first_run_blue_scaf1.summaryfile.txt*
+* *first_run_blue_scaf1.summaryfile.txt*
 
 And here from last run:
 
-*last_run_blue_scaf1.logfile.txt*
+* *last_run_blue_scaf1.logfile.txt*
 
-*last_run_blue_scaf1.summaryfile.txt*
+* *last_run_blue_scaf1.summaryfile.txt*
 
 
 **Note: files were all run in:**
