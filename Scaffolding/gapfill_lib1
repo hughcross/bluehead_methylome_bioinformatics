@@ -1,0 +1,4 @@
+Lib1 bwa /data/bluehead_scaffold/trim_data/blue_350bp_pe_1.fq /data/bluehead_scaffold/trim_data/blue_350bp_pe_2.fq 350 0.5 FR
+Lib2 bwa /data/bluehead_scaffold/trim_data/blue_550bp_pe_1.fq /data/bluehead_scaffold/trim_data/blue_550bp_pe_2.fq 550 0.5 FR
+Lib3 bwasw /data/bluehead_scaffold/trim_data/blue_matep_6k_1.fastq /data/bluehead_scaffold/trim_data/blue_matep_6k_2.fastq 4000 0.5 RF
+Lib4 bwasw /data/bluehead_scaffold/trim_data/blue_matep_8k_1.fastq /data/bluehead_scaffold/trim_data/blue_matep_8k_2.fastq 7000 0.5 RF
