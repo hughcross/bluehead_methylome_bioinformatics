@@ -12,25 +12,6 @@ SSPACE variable used (in my .bashrc, but just a preference):
 
 `SSPACE="/usr/local/SSPACE-STANDARD-3.0_linux-x86_64/SSPACE_Standard_v3.0.pl"`
 
-**copied all trimmed files to working folder**
-
-`cp_unzip_files.sh`
-
-### Rename, concat insert libs
-
-Libraries used: pe trimmed with Trimmomatic (folder: trailing26, from Trimmomatic processing)
-
-Sequence files were run on two lanes, so these were combined into single files Renaming sequence files is my own preference, but I like more info in indiv reads
-
-`rename_pe_files.sh` # note: this file loops through my python renaming script `seq_name_changer.py` # which is in path
-`cat_rm_pe_files.sh`
-
-(unpaired files also renamed and combined):
-
-```
-rename_unpaired_files.sh
-cat_rm_unp_files.sh
-```
 
 ## Mapping and converting sam files to table format
 
