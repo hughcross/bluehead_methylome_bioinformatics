@@ -126,5 +126,9 @@ And here from last run:
 Some original files will be left there. Large data files will be zipped and moved
 
 
+## Gapfilling
+
+The program GapFiller (Boetzer & Pirovano, 2012) was used to close gaps in scaffolds produced by SSPACE. As with scaffolding, all libraries were used, including both insert sizes and mate pairs.
+
 
 
