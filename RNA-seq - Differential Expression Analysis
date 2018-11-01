@@ -1,0 +1,140 @@
+##DIFFERENTIAL EXPRESSION ANALYSES
+###DESeq2 in R. Example for Gonad samples.
+
+###IMPORT DATA AND DESIGN INTO DESeqDataSet
+cts <- read.table('gonad_cmd_matrix_2018-06-05.isoform.counts.matrix', header=TRUE, row.names=1)
+coldata <- read.csv("coldata.csv", row.names=1)
+coldata <- coldata[,c("Stage","run")]
+
+#Round to integers
+cts <- round(cts, 0)
+head(cts)
+
+#construct DESeqDataSet 
+library("DESeq2")
+dds <- DESeqDataSetFromMatrix(countData = cts, colData = coldata, design = ~ run + Stage)
+
+keep <- rowSums(counts(dds)) >= 10
+dds <- dds[keep,]
+
+###DIFFERENTIAL EXPRESSION
+
+dds <- DESeq(dds)
+
+##Each stage against CF
+
+#CF v S1
+resCFvS1 <- results(dds, contrast=c("Stage", "S1", "CF"), alpha=0.05, lfcThreshold=1)
+resCFvS1
+summary(resCFvS1, alpha=.05, lfcThreshold=1)
+write.table(resCFvS1, file="DiffExpIso_CFvS1_Gonad.txt", sep ="\t", quote = FALSE)
+
+#CF v S2
+resCFvS2 <- results(dds, contrast=c("Stage", "S2", "CF"), alpha=0.05, lfcThreshold=1)
+resCFvS2
+summary(resCFvS2, alpha=.05, lfcThreshold=1)
+write.table(resCFvS2, file="DiffExpIso_CFvS2_Gonad.txt", sep ="\t", quote = FALSE)
+
+#CF v S3
+resCFvS3 <- results(dds, contrast=c("Stage", "S3", "CF"), alpha=0.05, lfcThreshold=1)
+resCFvS3
+summary(resCFvS3, alpha=.05, lfcThreshold=1)
+write.table(resCFvS3, file="DiffExpIso_CFvS3_Gonad.txt", sep ="\t", quote = FALSE)
+
+#CF v S4
+resCFvS4 <- results(dds, contrast=c("Stage", "S4", "CF"), alpha=0.05, lfcThreshold=1)
+resCFvS4
+summary(resCFvS4, alpha=.05, lfcThreshold=1)
+write.table(resCFvS4, file="DiffExpIso_CFvS4_Gonad.txt", sep ="\t", quote = FALSE)
+
+#CF v S5a
+resCFvS5a <- results(dds, contrast=c("Stage", "S5a", "CF"), alpha=0.05, lfcThreshold=1)
+resCFvS5a
+summary(resCFvS5a, alpha=.05, lfcThreshold=1)
+write.table(resCFvS5a, file="DiffExpIso_CFvS5a_Gonad.txt", sep ="\t", quote = FALSE)
+
+#CF v S5b
+resCFvS5b <- results(dds, contrast=c("Stage", "S5b", "CF"), alpha=0.05, lfcThreshold=1)
+resCFvS5b
+summary(resCFvS5b, alpha=.05, lfcThreshold=1)
+write.table(resCFvS5b, file="DiffExpIso_CFvS5b_Gonad.txt", sep ="\t", quote = FALSE)
+
+#CF v S6
+resCFvS6 <- results(dds, contrast=c("Stage", "S6", "CF"), alpha=0.05, lfcThreshold=1)
+resCFvS6
+summary(resCFvS6, alpha=.05, lfcThreshold=1)
+write.table(resCFvS6, file="DiffExpIso_CFvS6_Gonad.txt", sep ="\t", quote = FALSE)
+
+#CF v TP
+resCFvTP <- results(dds, contrast=c("Stage", "TP", "CF"), alpha=0.05, lfcThreshold=1)
+resCFvTP
+summary(resCFvTP, alpha=.05, lfcThreshold=1)
+write.table(resCFvTP, file="DiffExpIso_CFvTP_Gonad.txt", sep ="\t", quote = FALSE)
+
+##Among neighbouring stages
+
+#S1 v S2
+resS1vS2 <- results(dds, contrast=c("Stage", "S2", "S1"), alpha=0.05, lfcThreshold=1)
+resS1vS2
+summary(resS1vS2, alpha=.05, lfcThreshold=1)
+write.table(resS1vS2, file="DiffExpIso_S1vS2_Gonad.txt", sep ="\t", quote = FALSE)
+
+#S2 v S3
+resS2vS3 <- results(dds, contrast=c("Stage", "S3", "S2"), alpha=0.05, lfcThreshold=1)
+resS2vS3
+summary(resS2vS3, alpha=.05, lfcThreshold=1)
+write.table(resS2vS3, file="DiffExpIso_S2vS3_Gonad.txt", sep ="\t", quote = FALSE)
+
+#S3 v S4
+resS3vS4 <- results(dds, contrast=c("Stage", "S4", "S3"), alpha=0.05, lfcThreshold=1)
+resS3vS4
+summary(resS3vS4, alpha=.05, lfcThreshold=1)
+write.table(resS3vS4, file="DiffExpIso_S3vS4_Gonad.txt", sep ="\t", quote = FALSE)
+
+#S4 v S5a
+resS4vS5a <- results(dds, contrast=c("Stage", "S5a", "S4"), alpha=0.05, lfcThreshold=1)
+resS4vS5a
+summary(resS4vS5a, alpha=.05, lfcThreshold=1)
+write.table(resS4vS5a, file="DiffExpIso_S4vS5a_Gonad.txt", sep ="\t", quote = FALSE)
+
+#S5a v S5b
+resS5avS5b <- results(dds, contrast=c("Stage", "S5b", "S5a"), alpha=0.05, lfcThreshold=1)
+resS5avS5b
+summary(resS5avS5b, alpha=.05, lfcThreshold=1)
+write.table(resS5avS5b, file="DiffExpIso_S5avS5b_Gonad.txt", sep ="\t", quote = FALSE)
+
+#S5b v S6
+resS5bvS6 <- results(dds, contrast=c("Stage", "S6", "S5b"), alpha=0.05, lfcThreshold=1)
+resS5bvS6
+summary(resS5bvS6, alpha=.05, lfcThreshold=1)
+write.table(resS5bvS6, file="DiffExpIso_S5bvS6_Gonad.txt", sep ="\t", quote = FALSE)
+
+#S6 v TP
+resS6vTP <- results(dds, contrast=c("Stage", "TP", "S6"), alpha=0.05, lfcThreshold=1)
+resS6vTP
+summary(resS6vTP, alpha=.05, lfcThreshold=1)
+write.table(resS6vTP, file="DiffExpIso_S6vTP_Gonad.txt", sep ="\t", quote = FALSE)
+
+
+##ANNOTATE RESULTS TABLES
+library('tidyverse')
+
+annotTable <- read.table('combined_isoform_annotations', row.names = 1, quote = "", sep='\t', fill = TRUE, header = TRUE)
+View(annotTable)
+
+deTable <- read.table('DiffExpIso_CFvS1_Gonad_Sig.txt', row.names = 1, comment = '#', sep='\t', header = TRUE)
+
+deGenes <- row.names(deTable)
+deG <- as.list(deGenes)
+
+annotFilt <- annotTable %>%
+  rownames_to_column('contigs') %>%
+  filter(contigs %in% deG)
+ 
+deT <- deTable %>%
+  rownames_to_column('contigs')
+
+merge_tableDE <- full_join(deT, annotFilt, by = "contigs", copy = FALSE)
+
+write.table(merge_tableDE, file = "DiffExpIso_CFvS1_Gonad_Sig_annotated.txt", row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
+
