@@ -119,16 +119,9 @@ And here from last run:
 * *last_run_blue_scaf1.summaryfile.txt*
 
 
-**Note: files were all run in:**
-
-/data/bluehead_scaffold
-
-Some original files will be left there. Large data files will be zipped and moved
-
-
 ## Gapfilling
 
-The program GapFiller (Boetzer & Pirovano, 2012) was used to close gaps in scaffolds produced by SSPACE. As with scaffolding, all libraries were used, including both insert sizes and mate pairs. The specific libraries used are found in the library file (gapfill\_lib1), and the parameters and results are detailed in the GapFiller summary output file (blue_gapfill1.summaryfile.final.txt)
+The program GapFiller (Boetzer & Pirovano, 2012) was used to close gaps in scaffolds produced by SSPACE. As with scaffolding, all libraries were used, including both insert sizes and mate pairs. The specific libraries used are found in the library file (*gapfill\_lib1*), and the parameters and results are detailed in the GapFiller summary output file (*blue_gapfill1.summaryfile.final.txt*)
 
 
 
