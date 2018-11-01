@@ -1,14 +1,16 @@
 # bluehead_methylome_bioinformatics
 
-This repository is intended to catalog all bioinformatic work for the *Bluehead Wrasse Methylome* Research Project. All method details, including scripts, log files, and various text files, will be included here. 
+This repository is intended to catalog all bioinformatic work for the *Bluehead Wrasse Sex Change Genomics* Research Project. All method details, including scripts, log files, and various text files, will be included here. 
 
 ## Components of Analysis
 
 The following categories will be included, each of which will be organised into a separate subfolder:
 
-* mRNA Transcriptome Assembly
+* RNA-seq Data QC and Expression Quantification
 
-* Differential Gene Expression
+* RNA-seq Global Expression Analysis
+
+* RNA-seq Differential Expression Analysis
 
 * Genome Assembly
 
