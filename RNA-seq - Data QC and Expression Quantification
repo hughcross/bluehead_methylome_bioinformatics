@@ -1,0 +1,40 @@
+###PROCESSING AND ANALYSIS OF RNA-SEQ DATA
+
+##DATA QC
+##Trimming raw reads with cut adapt
+#-j 12 cores
+#-q quality trim Q 5 at each end
+#-a -A forward and reverse adapter trim
+#-m discard processed reads shorter than 40 bp
+#--pair-filter=any drops the pair if only one read fails filtering
+
+for i in *.R1.fastq.gz;
+do basename=`echo $i | sed 's/R1.fastq.gz//g'`;
+echo $basename;
+cutadapt -j 12 -q 5,5 -a AGATCGGAAGAGC -A AGATCGGAAGAGC -m 40 --pair-filter=any -o ${basename}trim.R1.fastq.gz -p ${basename}trim.R2.fastq.gz $i ${basename}R2.fastq.gz > ${basename}cutadapt.log;
+done
+
+##EXPRESSION QUANTIFICATION
+##Trinity pipeline. Mapping raw reads to transcriptome with Bowtie2, abundance estimation with RSEM
+HUGH - did we amend from Kim’s script below?
+
+for r1 in *.R1.fastq.gz; do b=`basename $r1 .R1.fastq.gz`; r2=${b}.R2.fastq.gz; l $r1 $r2; PATH=/usr/local/bowtie2-2.2.9:/usr/local/RSEM-1.2.29/:$PATH /usr/local/trinityrnaseq-2.2.0/util/align_and_estimate_abundance.pl --debug --transcripts ./trinity-beta-jaccard_clip-v3-SS-RF-2015-01-09-fix.fasta --seqType fq --left $r1 --right $r2 --output_dir $b.rsem_out --est_method RSEM --aln_method bowtie2 --thread_count 32 --trinity_mode --SS_lib_type RF > $b.log 2> $b.err & done
+
+#prep reference
+$TRINITY_HOME/util/align_and_estimate_abundance.pl --transcripts $TRANSCRIPT --est_method RSEM --aln_method bowtie2 --trinity_mode --prep_reference
+
+#map and estimate abundance
+$TRINITY_HOME/util/align_and_estimate_abundance.pl --thread_count 16 \
+--transcripts $TRANSCRIPT --seqType fq \
+--left $samp\.trim.R1.fastq.gz --right $samp\.trim.R2.fastq.gz \
+--SS_lib_type RF --est_method RSEM --aln_method bowtie2 --trinity_mode \
+--output_dir $samp\_rsem_out
+done
+
+#generate results table
+$TRINITY_HOME/util/abundance_estimates_to_matrix.pl --est_method RSEM \
+ --gene_trans_map $TRANSCRIPT\.gene_trans_map \
+ --out_prefix forebrain_cmd_matrix_2018-06-05 \
+ --name_sample_by_basedir \
+ F_CF_114F_rsem_out/RSEM.isoforms.results \
+#etc. for all samples
