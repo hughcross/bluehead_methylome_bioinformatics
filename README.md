@@ -16,5 +16,7 @@ The following categories will be included, each of which will be organised into 
 
 * [Genome Scaffolding and Gapfilling](https://github.com/hughcross/bluehead_methylome_bioinformatics/tree/master/Scaffolding)
 
+* Genome Annotation
+
 * Methylome Analysis
 
