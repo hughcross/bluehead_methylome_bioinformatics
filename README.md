@@ -6,11 +6,13 @@ This repository is intended to catalog all bioinformatic work for the *Bluehead 
 
 The following categories will be included, each of which will be organised into a separate subfolder:
 
-* RNA-seq Data QC and Expression Quantification
+* [RNA-seq and Methylome analysis](https://github.com/hughcross/bluehead_methylome_bioinformatics/tree/master/RNA-seq\ and\ Methylome\ analysis)
 
-* RNA-seq Global Expression Analysis
+    * RNA-seq Data QC and Expression Quantification
 
-* RNA-seq Differential Expression Analysis
+    * RNA-seq Global Expression Analysis
+
+    * RNA-seq Differential Expression Analysis
 
 * Genome Assembly
 
