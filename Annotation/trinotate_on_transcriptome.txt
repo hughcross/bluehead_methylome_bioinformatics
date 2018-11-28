@@ -1,0 +1,34 @@
+# previously published transcriptome
+
+# init
+$trin/Trinotate pasaA_Trinotate.sqlite init --gene_trans_map genemap.txt --transcript_fasta bluePasa_1A.assemblies.fasta --transdecoder_pep bluePasa_1A.assemblies.fasta.transdecoder.pep
+
+# load blast and pfam results
+## Note: blast and pfam searches done on server, as per Trinotate instructions
+
+$trin/Trinotate pasaA_Trinotate.sqlite LOAD_swissprot_blastp pasaA_blastp.outfmt6
+
+$trin/Trinotate pasaA_Trinotate.sqlite LOAD_pfam pasaA_pfam.domtblout
+
+$trin/Trinotate pasaA_Trinotate.sqlite LOAD_swissprot_blastx pasaA_blastx.outfmt6
+
+## load custom blast results
+
+$trin/Trinotate pasaA_Trinotate.sqlite LOAD_custom_blast --outfmt6 zfish_blastp_pasaA.outfmt6 --prog blastp --dbtype zfish_blpA
+
+$trin/Trinotate pasaA_Trinotate.sqlite LOAD_custom_blast --outfmt6 zfish_blastx_pasaA.outfmt6 --prog blastx --dbtype zfish_blxA
+
+$trin/Trinotate pasaA_Trinotate.sqlite LOAD_custom_blast --outfmt6 tilapia_blastp_pasaA.outfmt6 --prog blastp --dbtype tilap_blpA
+
+$trin/Trinotate pasaA_Trinotate.sqlite LOAD_custom_blast --outfmt6 tilap_blastx_pasaA.outfmt6 --prog blastx --dbtype tilap_blxA
+
+## output a report
+
+$trin/Trinotate pasaA_Trinotate.sqlite report > pasaA_trinotate_annotation_report.xls
+
+## annotations from Trinotate report used to produce custom gff files using Python notebooks and R scripts
+
+ann_blue_annotations.gff3
+ann_blue_genemaps_with_zebrafish_annotations.gff3
+blue_annotations_sprot_EVT.gff3
+blue_genemaps_with_zebrafish_annotations_EVT.gff3

@@ -1,0 +1,65 @@
+run_pasa_on_Anns_transcriptome
+
+###########################################
+## seqclean on genome
+PASA='/home/hugh/programs/PASApipeline-pasa-v2.2.0'
+
+$PASA/seqclean/seqclean/seqclean ann-trinity-beta-jaccard_clip-v3-SS-RF-2015-01-09-fix.fasta -c 8 -n 10000 
+
+
+## alignments run on NeSI, scaffold names changed to conform (: replaced with _)
+blue_transA_to_genomeV1_pasa.gff3
+conv_blatA.gff3 # converted from .pl file
+
+###########################################
+### PASA round 1
+
+$PASA/scripts/Launch_PASA_pipeline.pl -c bluePasa1A_alignAssembly.txt -C -R \
+  -g ../bluePasa/star_bluehead_genome_v1_27_02_2018.fa \
+  -t ann-trinity-beta-jaccard_clip-v3-SS-RF-2015-01-09-fix.fasta.clean \
+  -T -u ann-trinity-beta-jaccard_clip-v3-SS-RF-2015-01-09-fix.fasta \
+  --IMPORT_CUSTOM_ALIGNMENTS_GFF3 blue_transA_to_genomeV1_pasa.gff3 \
+  --IMPORT_CUSTOM_ALIGNMENTS_GFF3 conv_blatA.gff3 --CPU 12 \
+  --TRANSDECODER
+
+# more issues with blat
+
+$PASA/scripts/Launch_PASA_pipeline.pl -c bluePasa1A_alignAssembly.txt -s 2 -R \
+  -g ../bluePasa/star_bluehead_genome_v1_27_02_2018.fa \
+  -t ann-trinity-beta-jaccard_clip-v3-SS-RF-2015-01-09-fix.fasta.clean \
+  -T -u ann-trinity-beta-jaccard_clip-v3-SS-RF-2015-01-09-fix.fasta \
+  --IMPORT_CUSTOM_ALIGNMENTS_GFF3 blue_transA_to_genomeV1_pasa.gff3 \
+  --TRANSDECODER --CPU 12
+  
+## now add blat alignments
+
+$PASA/scripts/Load_Current_Gene_Annotations.dbi -c bluePasa1A_alignAssembly.txt -g ../bluePasa/star_bluehead_genome_v1_27_02_2018.fa -P conv_blatA.gff3
+
+## run comparison
+
+# remember to add path for fasta
+PATH=$PATH:/usr/local/fasta-36.3.8e/bin
+export PATH
+
+$PASA/scripts/Launch_PASA_pipeline.pl -c blueAnnotCompareA.config \
+  -A -g ../bluePasa/star_bluehead_genome_v1_27_02_2018.fa \
+  -t ann-trinity-beta-jaccard_clip-v3-SS-RF-2015-01-09-fix.fasta.clean \
+  --CPU 8 -f ann-trinity-beta-jaccard_clip-v3-SS-RF-2015-01-09-fix.fasta.clean.transdecoder.gff3.fl_accs
+  
+
+# and again with previous results
+
+$PASA/scripts/Launch_PASA_pipeline.pl -c blueAnnotCompareA.config \
+  -A -g ../bluePasa/star_bluehead_genome_v1_27_02_2018.fa \
+  -t ann-trinity-beta-jaccard_clip-v3-SS-RF-2015-01-09-fix.fasta.clean \
+  -L --annots_gff3 bluePasa_1A.gene_structures_post_PASA_updates.10116.gff3 \
+  --CPU 10 -f ann-trinity-beta-jaccard_clip-v3-SS-RF-2015-01-09-fix.fasta.clean.transdecoder.gff3.fl_accs
+
+
+### get training set
+
+$PASA/scripts/pasa_asmbls_to_training_set.dbi --pasa_transcripts_fasta bluePasa_1A.assemblies.fasta \
+ --pasa_transcripts_gff3 bluePasa_1A.pasa_assemblies.gff3
+
+
+
