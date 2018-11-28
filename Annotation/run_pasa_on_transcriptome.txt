@@ -1,4 +1,4 @@
-run_pasa_on_Anns_transcriptome
+run_pasa_on_transcriptome
 
 ###########################################
 ## seqclean on genome
@@ -7,7 +7,7 @@ PASA='/home/hugh/programs/PASApipeline-pasa-v2.2.0'
 $PASA/seqclean/seqclean/seqclean ann-trinity-beta-jaccard_clip-v3-SS-RF-2015-01-09-fix.fasta -c 8 -n 10000 
 
 
-## alignments run on NeSI, scaffold names changed to conform (: replaced with _)
+## alignments run on NeSI (national NZ server), scaffold names changed to conform (: replaced with _)
 blue_transA_to_genomeV1_pasa.gff3
 conv_blatA.gff3 # converted from .pl file
 
