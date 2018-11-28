@@ -16,7 +16,7 @@ The following categories will be included, each of which will be organised into 
     
     * Methylome Analysis
 
-* Genome Assembly
+* [Genome Assembly](https://github.com/hughcross/bluehead_methylome_bioinformatics/tree/master/Genome_Assembly)
 
 * [Genome Scaffolding and Gapfilling](https://github.com/hughcross/bluehead_methylome_bioinformatics/tree/master/Scaffolding)
 
